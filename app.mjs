@@ -3,6 +3,7 @@ import fetch from "node-fetch";
 import { Request } from "tedious";
 import { TYPES } from "tedious";
 import { Connection } from "tedious";
+import { data2 } from './data2.mjs';
 // dotenv stuff
 import '../weather/loadEnv.mjs';
 
