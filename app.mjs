@@ -23,9 +23,7 @@ var config = {
         database: process.env.DB,
     }
 };
-// Data2 inicio
 
-// Data2 fin
 function insertOffice(index) {
     var connection = new Connection(config);
     connection.on("connect", function (err) {
