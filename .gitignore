@@ -3,6 +3,4 @@ node_modules
 # Other stuff
 .vscode
 .env
-help.txt
-data2.mjs
-data2.js
+offices.mjs

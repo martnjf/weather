@@ -1,11 +1,9 @@
-// imports
 import fetch from "node-fetch";
-import { Request } from "tedious";
-import { TYPES } from "tedious";
-import { Connection } from "tedious";
-import { data2 } from './data2.mjs';
-// dotenv stuff
-import '../weather/loadEnv.mjs';
+import { Request, TYPES, Connection } from "tedious";
+import { offices } from './offices.mjs';
+
+import dotenv from "dotenv"
+dotenv.config()
 
 const api_key = process.env.APIKEY;
 
@@ -31,12 +29,12 @@ function insertOffice(index) {
     });
     connection.connect();
 
-    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${data2[index].latjson}&lon=${data2[index].lonjson}&appid=${api_key}&units=metric&lang=sp`;
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${offices[index].latjson}&lon=${offices[index].lonjson}&appid=${api_key}&units=metric&lang=sp`;
     fetch(url)
         .then((response) => { return response.json(); })
         .then(function (data) {
             var myObject = {
-                Id_Oficina: data2[index].idoficina,
+                Id_Oficina: offices[index].idoficina,
                 Humedad: data.main.humidity,
                 Nubes: data.clouds.all,
                 Sensacion: data.main.feels_like,
@@ -78,7 +76,7 @@ function insertOffice(index) {
 }
 
 function functionLooper() {
-    for (let i = 0; i < data2.length; i++) {
+    for (let i = 0; i < offices.length; i++) {
         let response = insertOffice(i);
     }
 }
