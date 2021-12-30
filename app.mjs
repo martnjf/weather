@@ -28,19 +28,20 @@ function insertOffice(index) {
         console.log("Successful connection");
     });
     connection.connect();
-
+    
     let url = `https://api.openweathermap.org/data/2.5/weather?lat=${offices[index].latjson}&lon=${offices[index].lonjson}&appid=${api_key}&units=metric&lang=sp`;
     fetch(url)
         .then((response) => { return response.json(); })
         .then(function (data) {
             var myObject = {
-                Id_Oficina: offices[index].idoficina,
+                Id_Oficina: offices[index].IdOficina,
                 Humedad: data.main.humidity,
                 Nubes: data.clouds.all,
                 Sensacion: data.main.feels_like,
                 Temperatura: data.main.temp,
                 Descripcion: data.weather[0].description,
             };
+
             const request = new Request(
                 "EXEC USP_BI_CSL_insert_reg_RegistroTemperaturaXidOdicina @IdOficina, @Humedad, @Nubes, @Sensacion, @Temperatura, @Descripcion",
                 function (err) {
@@ -71,7 +72,6 @@ function insertOffice(index) {
                 connection.close();
             });
             connection.execSql(request);
-
         });
 }
 
