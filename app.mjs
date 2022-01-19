@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import { Request, TYPES, Connection } from "tedious";
 import { offices } from './offices.mjs';
-import { performance }  from "perf_hooks";
+// import { performance }  from "perf_hooks";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -82,9 +82,9 @@ function functionLooper() {
     }
 }
 
-var startTime = performance.now();
+// var startTime = performance.now();
 
 functionLooper();
 
-var endTime = performance.now();
-console.log(`Tiempo de ejecución ${endTime - startTime} milisegundos`);
+// var endTime = performance.now();
+// console.log(`Tiempo de ejecución ${endTime - startTime} milisegundos`);
