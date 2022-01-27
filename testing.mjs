@@ -1,5 +1,5 @@
 var i = 0;                                  //  set your counter to 1
-import { offices } from './offices.mjs';
+//  import { offices } from './offices.mjs';
 function insertOffice(index) {
     console.log(index);
 }
@@ -9,7 +9,7 @@ function myLoop() {                         //  create a loop function
     let response = insertOffice(i);         //  call a 3s setTimeout when the loop is called
     console.log('Running...');              //  your code here
     i++;                                    //  increment the counter
-    if (i < offices.length) {                           //  if the counter < 10, call the loop function
+    if (i < 5/*offices.length*/) {                           //  if the counter < 10, call the loop function
       myLoop();                             //  ..  again which will trigger another 
     }                                       //  ..  setTimeout()
   }, 1000)
@@ -18,7 +18,7 @@ function myLoop() {                         //  create a loop function
 myLoop();    
 
 //  https://www.codegrepper.com/code-examples/javascript/execute+for+loop+multiple+times+with+delay+in+between+javascript
-
+//  https://stackoverflow.com/questions/3583724/how-do-i-add-a-delay-in-a-javascript-loop#3583740
 /*
   function functionLooper() {
       for (let i = 0; i < 5; i++) {
