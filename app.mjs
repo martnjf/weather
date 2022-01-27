@@ -1,12 +1,11 @@
 import fetch from "node-fetch";
 import { Request, TYPES, Connection } from "tedious";
 import { offices } from './offices.mjs';
-// import { performance }  from "perf_hooks";
 
+var i = 1;
 import dotenv from "dotenv";
 dotenv.config();
 
-// const myTimeout = setTimeout(myGreeting, 5000);
 const api_key = process.env.APIKEY;
 
 var config = {
@@ -30,7 +29,7 @@ function insertOffice(index) {
         console.log("Successful connection");
     });
     connection.connect();
-    
+
     let url = `https://api.openweathermap.org/data/2.5/weather?lat=${offices[index].latjson}&lon=${offices[index].lonjson}&appid=${api_key}&units=metric&lang=sp`;
     fetch(url)
         .then((response) => { return response.json(); })
@@ -50,7 +49,7 @@ function insertOffice(index) {
                     if (err) {
                         console.log("No se pudo insertar dato, (" + index + "), " + err);
                     } else {
-                        console.log("Dato con id de Oficina: " + myObject.Id_Oficina +" insertado con éxito. (" + index + ").")
+                        console.log("Dato con id de Oficina: " + myObject.Id_Oficina + " insertado con éxito. (" + index + ").")
                     }
                 }
             );
@@ -74,20 +73,29 @@ function insertOffice(index) {
                 connection.close();
             });
             connection.execSql(request);
+            console.log(request);
         });
 }
 
-setTimeout(functionLooper, 2000);
-
-function functionLooper() {
-    for (let i = 0; i < offices.length; i++) {
-        let response = insertOffice(i);
+//  setTimeout(functionLooper, 2000);
+/*
+    function functionLooper() {
+        for (let i = 0; i < offices.length; i++) {
+            let response = insertOffice(i);
+        }
     }
+*/
+function myLoop() {
+    setTimeout(function () {
+        let response = insertOffice(i);
+        console.log('Running...');
+        i++;
+        if (i < 10) {
+            myLoop();
+        }
+    }, 1000)
 }
 
-// var startTime = performance.now();
+myLoop();
 
-// functionLooper();
-
-// var endTime = performance.now();
-// console.log(`Tiempo de ejecución ${endTime - startTime} milisegundos`);
+//  functionLooper();
