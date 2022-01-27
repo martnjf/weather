@@ -6,6 +6,7 @@ import { offices } from './offices.mjs';
 import dotenv from "dotenv";
 dotenv.config();
 
+// const myTimeout = setTimeout(myGreeting, 5000);
 const api_key = process.env.APIKEY;
 
 var config = {
@@ -76,6 +77,8 @@ function insertOffice(index) {
         });
 }
 
+setTimeout(functionLooper, 2000);
+
 function functionLooper() {
     for (let i = 0; i < offices.length; i++) {
         let response = insertOffice(i);
@@ -84,7 +87,7 @@ function functionLooper() {
 
 // var startTime = performance.now();
 
-functionLooper();
+// functionLooper();
 
 // var endTime = performance.now();
 // console.log(`Tiempo de ejecución ${endTime - startTime} milisegundos`);
