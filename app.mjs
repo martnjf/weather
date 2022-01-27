@@ -49,7 +49,7 @@ function insertOffice(index) {
                     if (err) {
                         console.log("No se pudo insertar dato, (" + index + "), " + err);
                     } else {
-                        console.log("Dato con id de Oficina: " + myObject.Id_Oficina + " insertado con éxito. (" + index + ").")
+                        console.log("Oficina con ID: " + myObject.Id_Oficina + " insertada con éxito. Inserción número " + index + 1 + ".")
                     }
                 }
             );
@@ -73,18 +73,10 @@ function insertOffice(index) {
                 connection.close();
             });
             connection.execSql(request);
-            console.log(request);
+            console.log(request);       //  Impresión del request
         });
 }
 
-//  setTimeout(functionLooper, 2000);
-/*
-    function functionLooper() {
-        for (let i = 0; i < offices.length; i++) {
-            let response = insertOffice(i);
-        }
-    }
-*/
 function myLoop() {
     setTimeout(function () {
         let response = insertOffice(i);
@@ -93,9 +85,7 @@ function myLoop() {
         if (i < offices.length) {
             myLoop();
         }
-    }, 1000)
+    }, 500)
 }
 
 myLoop();
-
-//  functionLooper();
