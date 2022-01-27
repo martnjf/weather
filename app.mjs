@@ -58,7 +58,7 @@ function insertOffice(index) {
             request.addParameter("Nubes", TYPES.SmallInt, myObject.Nubes);
             request.addParameter("Sensacion", TYPES.Float, myObject.Sensacion);
             request.addParameter("Temperatura", TYPES.Float, myObject.Temperatura);
-            request.addParameter("Descripcion", TYPES.VarChar, myObject.Descripcion);
+            request.addParameter("Descripcion", TYPES.NVarChar, myObject.Descripcion);
 
             request.on("row", function (columns) {
                 columns.forEach(function (column) {
