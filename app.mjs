@@ -2,7 +2,7 @@ import fetch from "node-fetch";
 import { Request, TYPES, Connection } from "tedious";
 import { offices } from './offices.mjs';
 
-var i = 1;
+var i = 0;
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -90,7 +90,7 @@ function myLoop() {
         let response = insertOffice(i);
         console.log('Running...');
         i++;
-        if (i < 10) {
+        if (i < offices.length) {
             myLoop();
         }
     }, 1000)
