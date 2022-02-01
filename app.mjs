@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import { Request, TYPES, Connection } from "tedious";
 import { offices } from './offices.mjs';
-
+import process from 'process';
 var i = 0;
 import dotenv from "dotenv";
 dotenv.config();
@@ -78,14 +78,19 @@ function insertOffice(index) {
 }
 
 function myLoop() {
-    setTimeout(function () {
-        let response = insertOffice(i);
-        console.log('Running...');
-        i++;
-        if (i < offices.length) {
-            myLoop();
-        }
-    }, 500)
+    try {
+        setTimeout(function () {
+            let response = insertOffice(i);
+            console.log('Running...');
+            i++;
+            if (i < offices.length) {
+                myLoop();
+            }
+        }, 500)
+    } catch (error) {
+        console.log(error);
+        process.exit();
+    }
 }
 
 myLoop();
