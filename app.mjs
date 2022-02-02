@@ -1,13 +1,15 @@
+// Módulos
 import fetch from "node-fetch";
 import { Request, TYPES, Connection } from "tedious";
-import { offices } from './offices.mjs';
-import process from 'process';
-var i = 0;
 import dotenv from "dotenv";
 dotenv.config();
-
+// Archivos
+import { offices } from './offices.mjs';
+import { logger } from './logger/index.mjs'
+// Variables y constantes globales
+var i = 0;
 const api_key = process.env.APIKEY;
-
+// Configuración de conexión 
 var config = {
     server: process.env.SERVER,
     authentication: {
@@ -73,24 +75,25 @@ function insertOffice(index) {
                 connection.close();
             });
             connection.execSql(request);
-            console.log(request);       //  Impresión del request
+            // console.log(request); Impresión del request
         });
 }
 
 function myLoop() {
-    try {
-        setTimeout(function () {
-            let response = insertOffice(i);
-            console.log('Running...');
-            i++;
-            if (i < offices.length) {
-                myLoop();
-            }
-        }, 500)
-    } catch (error) {
-        console.log(error);
-        process.exit();
-    }
+    setTimeout(function () {
+        let response = insertOffice(i);
+        console.log('Running...');
+        i++;
+        if (i < offices.length) {
+            myLoop();
+        }
+    }, 500)
 }
 
-myLoop();
+try {
+    myLoop();
+    logger.info('Exitoso');
+} catch (error) {
+    console.log(error);
+    logger.error(new Error(error));
+}
