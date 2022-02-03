@@ -90,10 +90,6 @@ function myLoop() {
     }, 500)
 }
 
-try {
-    myLoop();
-    logger.info('Exitoso');
-} catch (error) {
-    console.log(error);
-    logger.error(new Error(error));
-}
+myLoop();
+logger.info('Exitoso');
+logger.error(new Error(Error));
