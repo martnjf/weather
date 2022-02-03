@@ -81,15 +81,20 @@ function insertOffice(index) {
 
 function myLoop() {
     setTimeout(function () {
-        let response = insertOffice(i);
-        console.log('Running...');
-        i++;
-        if (i < offices.length) {
-            myLoop();
+        try {
+            let response = insertOffice(i);
+            i++;
+            if (i < offices.length) {
+                myLoop();
+            }
+            throw Error('unexpected Error');
+            console.log('Éxito');
+            logger.info('Success');
+        } catch (error) {
+            console.log('Acurrió un error');
+            logger.error(new Error(error));
         }
     }, 500)
 }
 
 myLoop();
-logger.info('Exitoso');
-logger.error(new Error(Error));
