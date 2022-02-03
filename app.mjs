@@ -87,7 +87,7 @@ function myLoop() {
             if (i < offices.length) {
                 myLoop();
             }
-            throw Error('unexpected Error');
+            // throw Error('unexpected Error');
             console.log('Éxito');
             logger.info('Success');
         } catch (error) {
