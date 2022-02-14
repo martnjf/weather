@@ -38,11 +38,27 @@ function insertOffice(index) {
         .then(function (data) {
             var myObject = {
                 Id_Oficina: offices[index].IdOficina,
-                Humedad: data.main.humidity,
-                Nubes: data.clouds.all,
-                Sensacion: data.main.feels_like,
-                Temperatura: data.main.temp,
+                Latitud:data.coord.lat,
+                Longitud:data.coord.lon,
+                Id: data.weather[0].id,
+                Principal: data.weather[0].main,
                 Descripcion: data.weather[0].description,
+                Icono: data.weather[0].icon,
+                Temperatura: data.main.temp,
+                Sensacion: data.main.feels_like,
+                Presion: data.main.pressure,
+                Humedad: data.main.humidity,
+                Temperatura_minima: data.main.temp_min,
+                Temperatura_maxima: data.main.temp_max,
+                Nivel_del_mar: data.main.sea_level,
+                Nivel_de_tierra: data.main.grnd_level,
+                Velocidad_del_viento: data.wind.speed,
+                Rafagas_de_viento: data.wind.gust,
+                Nubes: data.clouds.all, 
+                Tiempo_del_calculo_del_clima: data.dt,
+                Zona_horaria: data.timezone,
+                ID_ciudad: data.id,
+                Nombre_de_la_ciudad: data.name
             };
 
             const request = new Request(
