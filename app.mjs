@@ -75,7 +75,7 @@ function insertOffice(index) {
                     }
                 }
             );
-            request.addParameter("IdOficina", TYPES.SmallInt, myObject.Id_Oficina);
+            request.addParameter("IdOficina", TYPES.Int, myObject.Id_Oficina);
             request.addParameter("Humedad", TYPES.SmallInt, myObject.Humedad);
             request.addParameter("Nubes", TYPES.SmallInt, myObject.Nubes);
             request.addParameter("Sensacion", TYPES.Float, myObject.Sensacion);
