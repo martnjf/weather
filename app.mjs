@@ -108,6 +108,7 @@ function insertOffice(index) {
                 connection.close();
             });
             connection.execSql(request);
+            logger.info('Success' + 'ID Ciudad: ' + myObject.ID_ciudad);
         });
 }
 
@@ -119,8 +120,6 @@ function myLoop() {
             myLoop();
         }
         console.log('Éxito');
-        logger.info('Success' + 'ID Ciudad: ' + myObject.ID_ciudad);
-
     }, 500)
 }
 
