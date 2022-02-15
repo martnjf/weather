@@ -59,7 +59,6 @@ function insertOffice(index) {
             };
 
             const request = new Request(
-                // Actualizar Request !!!
                 "EXEC USP_BI_CSL_insert_reg_RegistroTemperaturaXidOdicina_2 @IdOficina, @Humedad, @Nubes, @Sensacion, @Temperatura, @Descripcion, @Principal, @Icono, @Presion, @Temperatura_Min, @Temperatura_Max, @Nivel_Mar, @Nivel_Tierra, @Velocidad_viento, @Rafagas_viento, @Tiempo_del_calculo_de_clima, @Zona_horaria, @ID_ciudad, @Nombre_Ciudad",
                 function (err) {
                     if (err) {
@@ -102,7 +101,6 @@ function insertOffice(index) {
                 connection.close();
             });
             connection.execSql(request);
-            // console.log(request); Impresión del request
         });
 }
 
@@ -114,7 +112,6 @@ function myLoop() {
             if (i < offices.length) {
                 myLoop();
             }
-            // throw Error('unexpected Error');
             console.log('Éxito');
             logger.info('Success');
         } catch (error) {
