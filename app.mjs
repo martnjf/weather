@@ -57,14 +57,14 @@ function insertOffice(index) {
                 ID_ciudad: data.id,
                 Nombre_Ciudad: data.name
             };
-            switch(myObject.Id_Oficina){
+            switch (myObject.Id_Oficina) {
                 case null:
                     myObject.Id_Oficina = myObject.ID_ciudad;
                     break;
                 default:
                     break;
             }
-            
+
             const request = new Request(
                 "EXEC USP_BI_CSL_insert_reg_RegistroTemperaturaXidOdicina @IdOficina, @Humedad, @Nubes, @Sensacion, @Temperatura, @Descripcion, @Principal, @Icono, @Presion, @Temperatura_Min, @Temperatura_Max, @Nivel_Mar, @Nivel_Tierra, @Velocidad_viento, @Rafagas_viento, @Tiempo_del_calculo_de_clima, @Zona_horaria, @ID_ciudad, @Nombre_Ciudad",
                 function (err) {
@@ -113,18 +113,14 @@ function insertOffice(index) {
 
 function myLoop() {
     setTimeout(function () {
-        try {
-            let response = insertOffice(i);
-            i++;
-            if (i < offices.length) {
-                myLoop();
-            }
-            console.log('Éxito');
-            logger.info('Success' + 'ID Ciudad: ' + myObject.ID_ciudad);
-        } catch (error) {
-            console.log('Acurrió un error');
-            logger.error(new Error(error));
+        let response = insertOffice(i);
+        i++;
+        if (i < offices.length) {
+            myLoop();
         }
+        console.log('Éxito');
+        logger.info('Success' + 'ID Ciudad: ' + myObject.ID_ciudad);
+
     }, 500)
 }
 
