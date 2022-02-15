@@ -15,7 +15,7 @@ export const logger = createLogger({
     ),
     'transports': [
         new winston.transports.File({
-            filename: 'logs/example.log'
+            filename: 'logs/log_inserciones.log'
         })
     ]
 });
