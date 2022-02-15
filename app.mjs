@@ -38,32 +38,29 @@ function insertOffice(index) {
         .then(function (data) {
             var myObject = {
                 Id_Oficina: offices[index].IdOficina,
-                Latitud:data.coord.lat,
-                Longitud:data.coord.lon,
-                Id: data.weather[0].id,
-                Principal: data.weather[0].main,
-                Descripcion: data.weather[0].description,
-                Icono: data.weather[0].icon,
-                Temperatura: data.main.temp,
-                Sensacion: data.main.feels_like,
-                Presion: data.main.pressure,
                 Humedad: data.main.humidity,
-                Temperatura_minima: data.main.temp_min,
-                Temperatura_maxima: data.main.temp_max,
-                Nivel_del_mar: data.main.sea_level,
-                Nivel_de_tierra: data.main.grnd_level,
-                Velocidad_del_viento: data.wind.speed,
-                Rafagas_de_viento: data.wind.gust,
                 Nubes: data.clouds.all, 
-                Tiempo_del_calculo_del_clima: data.dt,
+                Sensacion: data.main.feels_like,
+                Temperatura: data.main.temp,
+                Descripcion: data.weather[0].description,
+                Principal: data.weather[0].main,
+                Icono: data.weather[0].icon,
+                Presion: data.main.pressure,
+                Temperatura_Min: data.main.temp_min,
+                Temperatura_Max: data.main.temp_max,
+                Nivel_Mar: data.main.sea_level,
+                Nivel_Tierra: data.main.grnd_level,
+                Velocidad_viento: data.wind.speed,
+                Rafagas_viento: data.wind.gust,
+                Tiempo_del_calculo_de_clima: data.dt,
                 Zona_horaria: data.timezone,
                 ID_ciudad: data.id,
-                Nombre_de_la_ciudad: data.name
+                Nombre_Ciudad: data.name
             };
 
             const request = new Request(
                 // Actualizar Request !!!
-                "EXEC USP_BI_CSL_insert_reg_RegistroTemperaturaXidOdicina @IdOficina, @Humedad, @Nubes, @Sensacion, @Temperatura, @Descripcion",
+                "EXEC USP_BI_CSL_insert_reg_RegistroTemperaturaXidOdicina_2 @IdOficina, @Humedad, @Nubes, @Sensacion, @Temperatura, @Descripcion, @Principal, @Icono, @Presion, @Temperatura_Min, @Temperatura_Max, @Nivel_Mar, @Nivel_Tierra, @Velocidad_viento, @Rafagas_viento, @Tiempo_del_calculo_de_clima, @Zona_horaria, @ID_ciudad, @Nombre_Ciudad",
                 function (err) {
                     if (err) {
                         console.log("No se pudo insertar dato, (" + index + "), " + err);
@@ -73,27 +70,24 @@ function insertOffice(index) {
                 }
             );
             request.addParameter("IdOficina", TYPES.SmallInt, myObject.Id_Oficina);
-            request.addParameter("Latitud", TYPES.Float, myObject.Latitud);
-            request.addParameter("Longitud", TYPES.Float, myObject.Longitud);
-            request.addParameter("Id", TYPES.SmallInt, myObject.Id);
-            request.addParameter("Principal", TYPES.NVarChar, myObject.Principal);
-            request.addParameter("Descripcion", TYPES.NVarChar, myObject.Descripcion);
-            request.addParameter("Icono", TYPES.SmallInt, myObject.Icono);
-            request.addParameter("Temperatura", TYPES.Float, myObject.Temperatura);
+            request.addParameter("Humedad", TYPES.SmallInt, myObject.Humedad);
+            request.addParameter("Nubes", TYPES.SmallInt, myObject.Nubes);
             request.addParameter("Sensacion", TYPES.Float, myObject.Sensacion);
-            request.addParameter("Presion", TYPES.Float, myObject.Presion);
-            request.addParameter("Humedad", TYPES.Float, myObject.Humedad);
-            request.addParameter("Temperatura_minima", TYPES.Float, myObject.Temperatura_minima);
-            request.addParameter("Temperatura_maxima", TYPES.Float, myObject.Temperatura_maxima);
-            request.addParameter("Nivel_del_mar", TYPES.Float, myObject.Nivel_del_mar);
-            request.addParameter("Nivel_de_tierra", TYPES.Float, myObject.Nivel_de_tierra);
-            request.addParameter("Velocidad_del_viento", TYPES.Float, myObject.Velocidad_del_viento);
-            request.addParameter("Rafagas_de_viento", TYPES.Float, myObject.Rafagas_de_viento); //
-            request.addParameter("Nubes", TYPES.NVarChar, myObject.Nubes);
-            request.addParameter("Tiempo_del_calculo_del_clima", TYPES.Int, myObject.Tiempo_del_calculo_del_clima);
-            request.addParameter("Zona_horaria", TYPES.Int, myObject.Zona_horaria);
-            request.addParameter("ID_ciudad", TYPES.Int, myObject.ID_ciudad);
-            request.addParameter("Nombre_de_la_ciudad", TYPES.NVarChar, myObject.Nombre_de_la_ciudad);
+            request.addParameter("Temperatura", TYPES.Float, myObject.Temperatura);
+            request.addParameter("Descripcion", TYPES.NVarChar, myObject.Descripcion);
+            request.addParameter("Principal", TYPES.NVarChar, myObject.Principal);
+            request.addParameter("Icono", TYPES.NVarChar, myObject.Icono);
+            request.addParameter("Presion", TYPES.Float, myObject.Presion); 
+            request.addParameter("Temperatura_Min", TYPES.Float, myObject.Temperatura_Min);
+            request.addParameter("Temperatura_Max", TYPES.Float, myObject.Temperatura_Max);
+            request.addParameter("Nivel_Mar", TYPES.Float, myObject.Nivel_Mar);
+            request.addParameter("Nivel_Tierra", TYPES.Float, myObject.Nivel_Tierra);
+            request.addParameter("Velocidad_viento", TYPES.Float, myObject.Velocidad_viento);
+            request.addParameter("Rafagas_viento", TYPES.Float, myObject.Rafagas_viento); 
+            request.addParameter("Tiempo_del_calculo_de_clima", TYPES.BigInt, myObject.Tiempo_del_calculo_de_clima);
+            request.addParameter("Zona_horaria", TYPES.Float, myObject.Zona_horaria);
+            request.addParameter("ID_ciudad", TYPES.Float, myObject.ID_ciudad);
+            request.addParameter("Nombre_Ciudad", TYPES.NVarChar, myObject.Nombre_Ciudad);
 
             request.on("row", function (columns) {
                 columns.forEach(function (column) {
